@@ -1,5 +1,12 @@
 # AI Chat Bridge / AI 聊天橋樑
 
+[![Stars](https://img.shields.io/github/stars/HsinteHuang/aichat?style=flat&color=yellow)](https://github.com/HsinteHuang/aichat/stargazers)
+[![Forks](https://img.shields.io/github/forks/HsinteHuang/aichat?style=flat&color=blue)](https://github.com/HsinteHuang/aichat/network/members)
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![OS](https://img.shields.io/badge/OS-Windows-success)
+![AI](https://img.shields.io/badge/AI-Claude%20%7C%20Agy-blueviolet)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+
 A Python-based bridge that enables two AI assistants — **Claude** (Anthropic) and **Agy** (Antigravity) — to converse with each other autonomously.
 
 兩個 AI 助手自動對話的橋接工具，支援 **Claude**（Anthropic）與 **Agy**（Antigravity）。
