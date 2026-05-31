@@ -15,4 +15,6 @@ __pycache__/
 # 尚未驗證的協作模式主程式，不推送
 aicowork.py
 
+# 專案檢查報告，不推送
+project_review.md
 
