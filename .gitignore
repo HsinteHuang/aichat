@@ -1,0 +1,18 @@
+# 對話與協作紀錄，不推送（保留目錄結構）
+log/*
+!log/.gitkeep
+cowork_temp/*
+!cowork_temp/.gitkeep
+cowork_result/*
+!cowork_result/.gitkeep
+
+# Python 暫存
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# 尚未驗證的協作模式主程式，不推送
+aicowork.py
+
+
