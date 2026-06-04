@@ -34,11 +34,19 @@ def strip_ansi(text):
     return text
 
 
+HISTORY_WINDOW = 10  # 傳入 prompt 的最近幾筆對話（每輪 2 筆，預設保留最近 5 輪）
+
+
 def build_prompt_for_claude(history):
-    """由 Claude 修改：將完整對話歷史整合成 prompt，最後一筆一定是 Agy 說的話。
-    不重複傳入 new_message，避免最後一句被重複兩次導致 Claude 誤以為是新對話。"""
+    """將對話歷史整合成 prompt，最後一筆一定是 Agy 說的話。
+    只取最近 HISTORY_WINDOW 筆，避免 prompt 隨輪數無限增長。"""
+    window = history[-HISTORY_WINDOW:]
+    omitted = len(history) - len(window)
     lines = ['以下是你（Claude）與 Agy 目前的完整對話紀錄，最後是 Agy 說的話，請直接回應：', '']
-    for speaker, msg in history:
+    if omitted:
+        lines.append(f'（更早的 {omitted} 筆對話已省略）')
+        lines.append('')
+    for speaker, msg in window:
         prefix = '你（Claude）' if speaker == 'Claude' else speaker
         lines.append(f'[{prefix}]：{msg}')
         lines.append('')
@@ -47,10 +55,15 @@ def build_prompt_for_claude(history):
 
 
 def build_prompt_for_agy(history):
-    """由 Claude 修改：將完整對話歷史整合成 prompt，最後一筆一定是 Claude 說的話。
-    不重複傳入 new_message，避免最後一句被重複兩次。"""
+    """將對話歷史整合成 prompt，最後一筆一定是 Claude 說的話。
+    只取最近 HISTORY_WINDOW 筆，避免 prompt 隨輪數無限增長。"""
+    window = history[-HISTORY_WINDOW:]
+    omitted = len(history) - len(window)
     lines = ['以下是你（Agy）與 Claude 目前的完整對話紀錄，最後是 Claude 說的話，請直接回應：', '']
-    for speaker, msg in history:
+    if omitted:
+        lines.append(f'（更早的 {omitted} 筆對話已省略）')
+        lines.append('')
+    for speaker, msg in window:
         prefix = '你（Agy）' if speaker == 'Agy' else speaker
         lines.append(f'[{prefix}]：{msg}')
         lines.append('')
